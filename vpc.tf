@@ -5,8 +5,17 @@ variable "region" {
 
 provider "aws" {
   region = var.region
-  access_key = "AKIAVWIRYMANTVWSXU6L"
-  secret_key = "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"
+}
+
+terraform {
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "rnd-toy"
+
+    workspaces {
+      name = "eks"
+    }
+  }
 }
 
 data "aws_availability_zones" "available" {}
